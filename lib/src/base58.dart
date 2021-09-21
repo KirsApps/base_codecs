@@ -81,7 +81,7 @@ class Base58Encoder extends Converter<Uint8List, String> {
         carry = carry ~/ 58;
       }
     }
-    if (zeroCount > 0) buffer.write('1' * zeroCount);
+    if (zeroCount > 0) buffer.write(_alphabet[0] * zeroCount);
     for (final i in output.reversed.skipWhile((e) => e == 0)) {
       buffer.write(_alphabet[i]);
     }

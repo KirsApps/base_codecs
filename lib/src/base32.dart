@@ -72,7 +72,7 @@ class Base32CodecGeoHash extends Codec<Uint8List, String> {
 }
 
 class Base32CodecWordSafe extends Codec<Uint8List, String> {
-  static const String _alphabet = "23456789CFGHJMPQRVWXCFGHJMPQRVWX";
+  static const String _alphabet = "23456789CFGHJMPQRVWXcfghjmpqrvwx";
   static const String _padding = "";
   const Base32CodecWordSafe();
 
@@ -82,7 +82,7 @@ class Base32CodecWordSafe extends Codec<Uint8List, String> {
 
   @override
   Converter<String, Uint8List> get decoder =>
-      const Base32Decoder(_alphabet, _padding);
+      const Base32Decoder(_alphabet, _padding, caseInsensitive: false);
 }
 
 class Base32CodecCustom extends Codec<Uint8List, String> {
@@ -133,11 +133,16 @@ class Base32Encoder extends Converter<Uint8List, String> {
 class Base32Decoder extends Converter<String, Uint8List> {
   final String _alphabet;
   final String _padding;
-  const Base32Decoder(this._alphabet, this._padding);
+  final bool caseInsensitive;
+  const Base32Decoder(
+    this._alphabet,
+    this._padding, {
+    this.caseInsensitive = true,
+  });
 
   @override
   Uint8List convert(String input) {
-    String data = input.toUpperCase();
+    String data = caseInsensitive ? input.toUpperCase() : input;
     if (_padding.isNotEmpty) {
       data = input.replaceAll(_padding, "");
     }

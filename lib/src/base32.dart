@@ -104,7 +104,7 @@ class Base32Encoder extends Converter<Uint8List, String> {
 
   @override
   String convert(Uint8List input) {
-    StringBuffer buffer = StringBuffer();
+    final buffer = StringBuffer();
     int bits = 0;
     int value = 0;
 
@@ -147,7 +147,7 @@ class Base32Decoder extends Converter<String, Uint8List> {
     int value = 0;
     int byte = 0;
     for (int i = 0; i < length; i++) {
-      int index = _alphabet.indexOf(data[i]);
+      final index = _alphabet.indexOf(data[i]);
       if (index == -1) {
         throw FormatException('Invalid character detected: ${data[i]}');
       }

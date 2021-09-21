@@ -63,7 +63,7 @@ class Base58Encoder extends Converter<Uint8List, String> {
 
   @override
   String convert(Uint8List input) {
-    StringBuffer buffer = StringBuffer();
+    final buffer = StringBuffer();
     final length = input.length;
 
     int zeroCount = 0;
@@ -74,7 +74,7 @@ class Base58Encoder extends Converter<Uint8List, String> {
     final size = data.length * 138 ~/ 100 + 1;
     final output = Uint8List(size);
     final maxIndex = size - 1;
-    for (int byte in data) {
+    for (final byte in data) {
       for (int carry = byte, i = 0; i < maxIndex || carry != 0; i++) {
         carry = carry + 256 * (0xFF & output[i]);
         output[i] = (carry % 58) & 0xFF;
@@ -82,7 +82,7 @@ class Base58Encoder extends Converter<Uint8List, String> {
       }
     }
     if (zeroCount > 0) buffer.write('1' * zeroCount);
-    for (int i in output.reversed.skipWhile((e) => e == 0)) {
+    for (final i in output.reversed.skipWhile((e) => e == 0)) {
       buffer.write(_alphabet[i]);
     }
 
@@ -108,11 +108,12 @@ class Base58Decoder extends Converter<String, Uint8List> {
     final size = data.length * 733 ~/ 1000 + 1;
     final output = Uint8List(size);
     final maxIndex = size - 1;
-    for (int char in data.runes) {
+    for (final char in data.runes) {
       int carry = _decodeList[char];
       if (carry == -1) {
         throw FormatException(
-            'Invalid character detected ${String.fromCharCode(char)}');
+          'Invalid character detected ${String.fromCharCode(char)}',
+        );
       }
       for (int i = 0; i < maxIndex || carry != 0; i++) {
         carry = (carry & 0xFF) + 58 * output[i];
@@ -121,6 +122,7 @@ class Base58Decoder extends Converter<String, Uint8List> {
       }
     }
     return Uint8List.fromList(
-        [...Uint8List(zeroCount), ...output.reversed.skipWhile((e) => e == 0)]);
+      [...Uint8List(zeroCount), ...output.reversed.skipWhile((e) => e == 0)],
+    );
   }
 }

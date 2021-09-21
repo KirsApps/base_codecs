@@ -29,10 +29,11 @@ class Base16Encoder extends Converter<Uint8List, String> {
 
   @override
   String convert(Uint8List input) {
-    StringBuffer buffer = StringBuffer();
-    for (int byte in input) {
+    final buffer = StringBuffer();
+    for (final byte in input) {
       buffer.write(
-          "${byte < 16 ? '0' : _alphabet[byte >> 4]}${_alphabet[byte & 0xF]}");
+        "${byte < 16 ? '0' : _alphabet[byte >> 4]}${_alphabet[byte & 0xF]}",
+      );
     }
 
     return buffer.toString();
@@ -55,10 +56,10 @@ class Base16Decoder extends Converter<String, Uint8List> {
     if (data.length % 2 != 0) {
       data = "0$data";
     }
-    Uint8List result = Uint8List(data.length ~/ 2);
+    final result = Uint8List(data.length ~/ 2);
     for (int i = 0; i < result.length; i++) {
-      int firstDigit = _alphabet.indexOf(data[i * 2]);
-      int secondDigit = _alphabet.indexOf(data[i * 2 + 1]);
+      final firstDigit = _alphabet.indexOf(data[i * 2]);
+      final secondDigit = _alphabet.indexOf(data[i * 2 + 1]);
       if (firstDigit == -1 || secondDigit == -1) {
         throw FormatException("Non-hex character detected in $data");
       }

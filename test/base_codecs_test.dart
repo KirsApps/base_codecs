@@ -72,8 +72,10 @@ void main() {
     });
   });
   group('base58', () {
+    const dataWithZero = [0, 0, 0, 0, 0xff, 0, 0, 0, 0, 0xff];
     group('Bitcoin', () {
       const codec = Base58CodecBitcoin();
+      const encodedDataWithZero = "11113ByzJkRhg";
       const encoded =
           "2KG5obUH7D2G2qLPjujWXdCd1FK6heTdfCjVn1MwP3unVrwcoTz3QyxtBe8Dpxfc5Afnf6VL2b4Ae9RWHEJ957WJpTXTXKcSyFZb17ALWU1BcBsNv2Cncqm5qTadzLcryeftfjtFZfJ14EKKf7UVd5h7UXFSqpmB144w2Eyb9gwvh7mofZpc7oSQv4ZSso9tD1589EjLERTebQoFtt8isgKarX4HGRWUpQCRkAPWuiNrYeV4XEmE4ez4f2mWN1vgGPcX8mKm7RXjYnQ1aGF3oZvKrQQ1ySEq4b5fLvQxcGzCp9xsVdfgK3pXC1RQPf8nyhik8JEnGdXV999wjaj7ggrcEtmkZH41ynpvSYkDecL8nNMT";
       test('encode', () {
@@ -85,9 +87,19 @@ void main() {
       test('decode', () {
         expect(codec.decode(encoded), utf8.encode(testString));
       });
+      test('encode with zero', () {
+        expect(
+          codec.encode(Uint8List.fromList(dataWithZero)),
+          equals(encodedDataWithZero),
+        );
+      });
+      test('decode with zero', () {
+        expect(codec.decode(encodedDataWithZero), dataWithZero);
+      });
     });
     group('Flickr', () {
       const codec = Base58CodecFlickr();
+      const encodedDataWithZero = "11113bYZiKqGF";
       const encoded =
           '2jg5NAth7d2g2QkoJUJvwCcC1fj6GDsCEcJuM1mWo3UMuRWBNsZ3pYXTbD8dPXEB5aEME6uk2A4aD9qvhei957viPswswjBrYfyA17akvt1bBbSnV2cMBQL5QszCZkBRYDETEJTfyEi14ejjE7tuC5G7twfrQPLb144W2eYA9FWVG7LNEyPB7NrpV4yrSN9Td1589eJkeqsDApNfTT8HSFjzRw4hgqvtPpcqKaovUHnRxDu4weLe4DZ4E2Lvn1VFgoBw8LjL7qwJxMp1zgf3NyVjRpp1YreQ4A5EkVpXBgZcP9XSuCEFj3Pwc1qpoE8MYGHK8ieMgCwu999WJzJ7FFRBeTLKyh41YMPVrxKdDBk8Mnms';
       test('encode', () {
@@ -98,6 +110,15 @@ void main() {
       });
       test('decode', () {
         expect(codec.decode(encoded), utf8.encode(testString));
+      });
+      test('encode with zero', () {
+        expect(
+          codec.encode(Uint8List.fromList(dataWithZero)),
+          equals(encodedDataWithZero),
+        );
+      });
+      test('decode with zero', () {
+        expect(codec.decode(encodedDataWithZero), dataWithZero);
       });
     });
   });

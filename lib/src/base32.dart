@@ -58,7 +58,7 @@ class Base32CodecZBase extends Codec<Uint8List, String> {
 }
 
 class Base32CodecGeoHash extends Codec<Uint8List, String> {
-  static const String _alphabet = "0123456789BCDEFGRVWXCFGHJMPQRVWX";
+  static const String _alphabet = "0123456789bcdefghjkmnpqrstuvwxyz";
   static const String _padding = "";
   const Base32CodecGeoHash();
 
@@ -68,7 +68,7 @@ class Base32CodecGeoHash extends Codec<Uint8List, String> {
 
   @override
   Converter<String, Uint8List> get decoder =>
-      const Base32Decoder(_alphabet, _padding);
+      const Base32Decoder(_alphabet, _padding, caseInsensitive: false);
 }
 
 class Base32CodecWordSafe extends Codec<Uint8List, String> {

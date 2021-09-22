@@ -127,6 +127,9 @@ void main() {
       const codec = Base85CodecAscii();
       const encoded =
           "<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp\$d7F!,L7@<6@)/0JDEF<G%<+EV:2F!,O<DJ+*.@<*K0@<6L(Df-\\0Ec5e;DffZ(EZee.Bl.9pF\"AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@FD,*)+C]U=@3BN#EcYf8ATD3s@q?d\$AftVqCh[NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<?3r@:F%a+D58'ATD4\$Bl@l3De:,-DJs`8ARoFb/0JMK@qB4^F!,R<AKZ&-DfTqBG%G>uD.RTpAKYo\'+CT/5+Cei#DII?(E,9)oF*2M7/c~>";
+      const encodedWithSymbols =
+          "<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>  Cj@.4Gp\$d7F!,L7@<6@)/0JDEF<G%<+EV  :2F!,O<DJ+*.@<*K0@<6L(Df-\\0Ec5e"
+          ";DffZ(EZee.Bl.9pF\"AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@F      D,*)+C] U=@3BN#EcYf 8ATD3s@q?d\$AftVqCh           [NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<?3r@:F%a+D58'ATD4\$Bl@l3De:,-DJs`8ARoFb/0JMK@qB4^F!,R<AKZ&-DfTqBG%G>uD.RTpAKYo\'+CT/5+Cei#DII?(E,9)oF*2M7/c~>";
       test('encode', () {
         expect(
           codec.encode(Uint8List.fromList(utf8.encode(testString))),
@@ -136,11 +139,17 @@ void main() {
       test('decode', () {
         expect(utf8.decode(codec.decode(encoded)), testString);
       });
+      test('decode with spec symbols', () {
+        expect(utf8.decode(codec.decode(encodedWithSymbols)), testString);
+      });
     });
     group('Z85', () {
       const codec = Base85CodecZ();
       const encoded =
           "o<}]Zx(+zcx(!xgzFa9aB7/b}efF?GBrCHty<vdjC{3^mB0bHmvrlv8efFzABrC4raARphB0bKrzFa9dvr9GfvrlH7z/cXfA=k!qz//V7AV!!dx(do{B1wCTxLy%&azC)tvixxeB95Kyw/#hewGU&7zE+pvBzb98ayYQsvixJ2A=U/nwPzi%v}u^3w/\$R}y?WJ}BrCpnaARpday/tcBzkSnwN(](zE:(7zE^r<vrui@vpB4:azkn6wPzj3x(v(iz!pbczF%-nwN]B+efFIGv}xjZB0bNrwGV5cz/P}xC4Ct#zdNP{wGU]6ayPekay!&2zEEu7Abo8]B9hIme=U>K";
+      const encodedWithSymbols =
+          "o<}]Zx(+zcx(!xgzFa9a     B7/b}efF?GBrCHt y<vdjC{3^mB0bHmvrlv8efFzABrC   "
+          "4raARphB0bKr zFa9dvr9GfvrlH7z/cXfA=k!qz//V7AV!!dx(do{B1wCTxLy%&a zC)tvixxeB95Kyw/#hewGU&7      zE+pvBzb98ayYQsvixJ2A=U/nwPzi%      v}u^3w/\$R}y?WJ}BrCpnaARpday/tcBzkSnwN(](zE:(7zE^r<vrui@vpB4:azkn6wPzj3x(v(iz!pbczF%-nwN]B+efFIGv}xjZB0bNrwGV5cz/P}xC4Ct#zdNP{wGU]6ayPekay!&2zEEu7Abo8]B9hIme=U>K";
       test('encode', () {
         expect(
           codec.encode(
@@ -151,6 +160,12 @@ void main() {
       });
       test('decode', () {
         expect(codec.decode(encoded), [...utf8.encode(testString), 0, 0, 0]);
+      });
+      test('decode with spec symbols', () {
+        expect(
+          codec.decode(encodedWithSymbols),
+          [...utf8.encode(testString), 0, 0, 0],
+        );
       });
     });
     group('IPv6', () {

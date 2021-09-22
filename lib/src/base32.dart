@@ -40,7 +40,7 @@ class Base32CodecCrockford extends Codec<Uint8List, String> {
 
   @override
   Converter<String, Uint8List> get decoder =>
-      const Base32Decoder(_alphabet, _padding);
+      const Base32DecoderCrockford(_alphabet, _padding);
 }
 
 class Base32CodecZBase extends Codec<Uint8List, String> {
@@ -144,7 +144,7 @@ class Base32Decoder extends Converter<String, Uint8List> {
   Uint8List convert(String input) {
     String data = caseInsensitive ? input.toUpperCase() : input;
     if (_padding.isNotEmpty) {
-      data = input.replaceAll(_padding, "");
+      data = data.replaceAll(_padding, "");
     }
     final buffer = Uint8List(data.length * 5 ~/ 8);
     final length = data.length;
@@ -164,5 +164,16 @@ class Base32Decoder extends Converter<String, Uint8List> {
       }
     }
     return buffer;
+  }
+}
+
+class Base32DecoderCrockford extends Base32Decoder {
+  const Base32DecoderCrockford(String alphabet, String padding)
+      : super(alphabet, padding);
+  @override
+  Uint8List convert(String input) {
+    return super.convert(
+      input.replaceAll(RegExp('[oO]'), '0').replaceAll(RegExp('[IiLl]'), '1'),
+    );
   }
 }

@@ -153,5 +153,23 @@ void main() {
         expect(codec.decode(encoded), [...utf8.encode(testString), 0, 0, 0]);
       });
     });
+    group('IPv6', () {
+      const codec = Base85CodecIPv6();
+      const base16 = Base16Codec();
+      //  1080:0:0:0:8:800:200C:417A from RFC 1924
+      const address = '108000000000000000080800200C417A';
+      const encoded = "4)+k&C#VzJ4br>0wv%Yp";
+      test('encode', () {
+        expect(
+          codec.encode(
+            Uint8List.fromList(base16.decode(address)),
+          ),
+          equals(encoded),
+        );
+      });
+      test('decode', () {
+        expect(codec.decode(encoded), base16.decode(address));
+      });
+    });
   });
 }

@@ -51,8 +51,10 @@ void main() {
       const encoded =
           "JIOSHEDJQCOGE4MUQTWSH35IPF3SO3MRFOOGH55WRBZSH5D3RBT81EDEPF31YHUFCF3S65TCRBT8K7BYCJH1Y7DEPF31YH5JP3UZK5DBQEO8YAMUQPWS65TYC33G65JYP74GO3M1RBOSH4MPCFS8GMBYQ7WG1A5ERBWZGEDBRBS8KH5WRBZSCEDWPB11Y5MJP31NAEDWPBOZEEDNXROGNEDOCI38G3MSCI3GN5UDCWOG63TYCT1SA4M8PB4NY4MQRB4GO3JYCPZSH7DJP34SK3BYCFZGEEDJP31GK3UBQTWSQAMNPT11Y35FP31ZRAMWPFZSHEDXCAOGS5UXQ7SGK3D8CWSNY3MACP1SK3DURB4GO3JYQPWG6HUWRB5GK4DFPI1SHA5FRBZSCEDBP3H1YA5BQJZGN5BYQBSGKAMUQI3GKMO";
       test('encode', () {
-        expect(codec.encode(Uint8List.fromList(utf8.encode(testString))),
-            equals(encoded));
+        expect(
+          codec.encode(Uint8List.fromList(utf8.encode(testString))),
+          equals(encoded),
+        );
       });
       test('decode', () {
         expect(codec.decode(encoded), utf8.encode(testString));
@@ -136,10 +138,10 @@ void main() {
     group('Ascii', () {
       const codec = Base85CodecAscii();
       const encoded =
-          "<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp\$d7F!,L7@<6@)/0JDEF<G%<+EV:2F!,O<DJ+*.@<*K0@<6L(Df-\\0Ec5e;DffZ(EZee.Bl.9pF\"AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@FD,*)+C]U=@3BN#EcYf8ATD3s@q?d\$AftVqCh[NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<?3r@:F%a+D58'ATD4\$Bl@l3De:,-DJs`8ARoFb/0JMK@qB4^F!,R<AKZ&-DfTqBG%G>uD.RTpAKYo\'+CT/5+Cei#DII?(E,9)oF*2M7/c~>";
+          "<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp\$d7F!,L7@<6@)/0JDEF<G%<+EV:2F!,O<DJ+*.@<*K0@<6L(Df-\\0Ec5e;DffZ(EZee.Bl.9pF\"AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@FD,*)+C]U=@3BN#EcYf8ATD3s@q?d\$AftVqCh[NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<?3r@:F%a+D58'ATD4\$Bl@l3De:,-DJs`8ARoFb/0JMK@qB4^F!,R<AKZ&-DfTqBG%G>uD.RTpAKYo'+CT/5+Cei#DII?(E,9)oF*2M7/c~>";
       const encodedWithSymbols =
           "<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>  Cj@.4Gp\$d7F!,L7@<6@)/0JDEF<G%<+EV  :2F!,O<DJ+*.@<*K0@<6L(Df-\\0Ec5e"
-          ";DffZ(EZee.Bl.9pF\"AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@F      D,*)+C] U=@3BN#EcYf 8ATD3s@q?d\$AftVqCh           [NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<?3r@:F%a+D58'ATD4\$Bl@l3De:,-DJs`8ARoFb/0JMK@qB4^F!,R<AKZ&-DfTqBG%G>uD.RTpAKYo\'+CT/5+Cei#DII?(E,9)oF*2M7/c~>";
+          ";DffZ(EZee.Bl.9pF\"AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@F      D,*)+C] U=@3BN#EcYf 8ATD3s@q?d\$AftVqCh           [NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<?3r@:F%a+D58'ATD4\$Bl@l3De:,-DJs`8ARoFb/0JMK@qB4^F!,R<AKZ&-DfTqBG%G>uD.RTpAKYo'+CT/5+Cei#DII?(E,9)oF*2M7/c~>";
       test('encode', () {
         expect(
           codec.encode(Uint8List.fromList(utf8.encode(testString))),

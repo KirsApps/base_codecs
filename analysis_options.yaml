@@ -1,3 +1,9 @@
 
 
 include: package:lint/analysis_options_package.yaml
+
+linter:
+  rules:
+    parameter_assignments: false
+    avoid_multiple_declarations_per_line: false
+    missing_whitespace_between_adjacent_strings: false

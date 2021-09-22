@@ -3,7 +3,11 @@ import 'dart:typed_data';
 
 import 'constants.dart';
 
-/// 85 pow 4
+const Base58CodecBitcoin base58Bitcoin = Base58CodecBitcoin();
+
+const Base58CodecFlickr base58Flickr = Base58CodecFlickr();
+
+const Base58CodecRipple base58Ripple = Base58CodecRipple();
 
 class Base58CodecBitcoin extends Codec<Uint8List, String> {
   static const String _alphabet =

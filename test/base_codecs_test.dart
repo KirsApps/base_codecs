@@ -160,6 +160,8 @@ void main() {
       const encodedWithSymbols =
           "o<}]Zx(+zcx(!xgzFa9a     B7/b}efF?GBrCHt y<vdjC{3^mB0bHmvrlv8efFzABrC   "
           "4raARphB0bKr zFa9dvr9GfvrlH7z/cXfA=k!qz//V7AV!!dx(do{B1wCTxLy%&a zC)tvixxeB95Kyw/#hewGU&7      zE+pvBzb98ayYQsvixJ2A=U/nwPzi%      v}u^3w/\$R}y?WJ}BrCpnaARpday/tcBzkSnwN(](zE:(7zE^r<vrui@vpB4:azkn6wPzj3x(v(iz!pbczF%-nwN]B+efFIGv}xjZB0bNrwGV5cz/P}xC4Ct#zdNP{wGU]6ayPekay!&2zEEu7Abo8]B9hIme=U>K";
+      const rfcTestData = [0x86, 0x4F, 0xD2, 0x6F, 0xB5, 0x59, 0xF7, 0x5B];
+      const rfcTestDataEncoded = "HelloWorld";
       test('encode', () {
         expect(
           codec.encode(
@@ -167,9 +169,16 @@ void main() {
           ),
           equals(encoded),
         );
+        expect(
+          codec.encode(
+            Uint8List.fromList(rfcTestData),
+          ),
+          equals(rfcTestDataEncoded),
+        );
       });
       test('decode', () {
         expect(codec.decode(encoded), [...utf8.encode(testString), 0, 0, 0]);
+        expect(codec.decode(rfcTestDataEncoded), rfcTestData);
       });
       test('decode with spec symbols', () {
         expect(

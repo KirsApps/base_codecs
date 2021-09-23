@@ -5,9 +5,21 @@ import 'constants.dart';
 
 const Base58CodecBitcoin base58Bitcoin = Base58CodecBitcoin();
 
+String base58BitcoinEncode(Uint8List input) => base58Bitcoin.encode(input);
+
+Uint8List base58BitcoinDecode(String input) => base58Bitcoin.decode(input);
+
 const Base58CodecFlickr base58Flickr = Base58CodecFlickr();
 
+String base58FlickrEncode(Uint8List input) => base58Flickr.encode(input);
+
+Uint8List base58FlickrDecode(String input) => base58Flickr.decode(input);
+
 const Base58CodecRipple base58Ripple = Base58CodecRipple();
+
+String base58RippleEncode(Uint8List input) => base58Ripple.encode(input);
+
+Uint8List base58RippleDecode(String input) => base58Ripple.decode(input);
 
 class Base58CodecBitcoin extends Codec<Uint8List, String> {
   static const String _alphabet =

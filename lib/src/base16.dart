@@ -1,6 +1,18 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+const Base16Codec base16 = Base16Codec();
+
+String base16Encode(Uint8List input) => base16.encode(input);
+
+Uint8List base16Decode(String input) => base16.decode(input);
+
+const hex = base16;
+
+String hexEncode(Uint8List input) => base16Encode(input);
+
+Uint8List hexDecode(String input) => base16Decode(input);
+
 class Base16Codec extends Codec<Uint8List, String> {
   static const String _alphabet = "0123456789ABCDEF";
   const Base16Codec();

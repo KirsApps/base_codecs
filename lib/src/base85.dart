@@ -18,7 +18,25 @@ const pow1 = 85;
 /// Uint 32 max value
 const maxUint32 = 4294967295;
 
+const Base85CodecAscii base85Ascii = Base85CodecAscii();
+
 final base85RegExp = RegExp(r'(^<~)+|[\x09\x0a\x0b\x0c\x0d\x20]|(~>$)+');
+
+String base85AsciiEncode(Uint8List input) => base85Ascii.encode(input);
+
+Uint8List base85AsciiDecode(String input) => base85Ascii.decode(input);
+
+const Base85CodecZ base85Z = Base85CodecZ();
+
+String base85ZEncode(Uint8List input) => base85Z.encode(input);
+
+Uint8List base85ZDecode(String input) => base85Z.decode(input);
+
+const Base85CodecIPv6 base85IPv6 = Base85CodecIPv6();
+
+String base85IPv6Encode(Uint8List input) => base85IPv6.encode(input);
+
+Uint8List base85IPv6Decode(String input) => base85IPv6.decode(input);
 
 class Base85CodecAscii extends Codec<Uint8List, String> {
   static const _alphabet =

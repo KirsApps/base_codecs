@@ -1,6 +1,42 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+const Base32CodecRfc base32Rfc = Base32CodecRfc();
+
+String base32RfcEncode(Uint8List input) => base32Rfc.encode(input);
+
+Uint8List base32RfcDecode(String input) => base32Rfc.decode(input);
+
+const Base32CodecRfcHex base32RfcHex = Base32CodecRfcHex();
+
+String base32RfcHexEncode(Uint8List input) => base32RfcHex.encode(input);
+
+Uint8List base32RfcHexDecode(String input) => base32RfcHex.decode(input);
+
+const Base32CodecCrockford base32Crockford = Base32CodecCrockford();
+
+String base32CrockfordEncode(Uint8List input) => base32Crockford.encode(input);
+
+Uint8List base32CrockfordDecode(String input) => base32Crockford.decode(input);
+
+const Base32CodecZBase base32ZBase = Base32CodecZBase();
+
+String base32ZBaseEncode(Uint8List input) => base32ZBase.encode(input);
+
+Uint8List base32ZBaseDecode(String input) => base32ZBase.decode(input);
+
+const Base32CodecGeoHash base32GeoHash = Base32CodecGeoHash();
+
+String base32GeoHashEncode(Uint8List input) => base32GeoHash.encode(input);
+
+Uint8List base32GeoHashDecode(String input) => base32GeoHash.decode(input);
+
+const Base32CodecWordSafe base32WordSafe = Base32CodecWordSafe();
+
+String base32WordSafeEncode(Uint8List input) => base32WordSafe.encode(input);
+
+Uint8List base32WordSafeDecode(String input) => base32WordSafe.decode(input);
+
 class Base32CodecRfc extends Codec<Uint8List, String> {
   static const String _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
   static const String _padding = "=";

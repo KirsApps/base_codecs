@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:base_codecs/base_codecs.dart';
 import 'package:crypto/crypto.dart' show sha256;
 
+/// Encodes given [input] with added 4 bytes of double Sha256 hash of [input]
 String base58CheckEncode(Uint8List input) {
   return base58Bitcoin.encode(
     Uint8List.fromList([
@@ -12,6 +13,7 @@ String base58CheckEncode(Uint8List input) {
   );
 }
 
+/// Decodes given [input] with check of 4 bytes of Sha256 checksum
 Uint8List base58CheckDecode(String input) {
   final data = base58Bitcoin.decode(input);
   final payload = data.sublist(0, data.length - 4);

@@ -1,42 +1,118 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+/// A [base32Rfc](https://tools.ietf.org/html/rfc4648) encoder and decoder.
+///
+/// It encodes and decodes using the base32 alphabet.
+/// It does not allow invalid characters when decoding.
 const Base32CodecRfc base32Rfc = Base32CodecRfc();
 
+/// Encodes [input] using [base32Rfc](https://tools.ietf.org/html/rfc4648) encoding.
+///
+/// Shorthand for `base32Rfc.encode(input)`.
+/// Useful if a local variable shadows the global [base32Rfc] constant.
 String base32RfcEncode(Uint8List input) => base32Rfc.encode(input);
 
+/// Decodes [input] using [base32Rfc](https://tools.ietf.org/html/rfc4648) decoding.
+///
+/// Shorthand for `base32Rfc.decode(input)`.
+/// Useful if a local variable shadows the global [base32Rfc] constant.
 Uint8List base32RfcDecode(String input) => base32Rfc.decode(input);
 
+/// A [base32RfcHex](https://tools.ietf.org/html/rfc4648) encoder and decoder.
+///
+/// It encodes and decodes using the base32Hex alphabet.
+/// It does not allow invalid characters when decoding.
 const Base32CodecRfcHex base32RfcHex = Base32CodecRfcHex();
 
+/// Encodes [input] using [base32RfcHex](https://tools.ietf.org/html/rfc4648) encoding.
+///
+/// Shorthand for `base32RfcHex.encode(input)`.
+/// Useful if a local variable shadows the global [base32RfcHex] constant.
 String base32RfcHexEncode(Uint8List input) => base32RfcHex.encode(input);
 
+/// Decodes [input] using [base32RfcHex](https://tools.ietf.org/html/rfc4648) decoding.
+///
+/// Shorthand for `base32RfcHex.decode(input)`.
+/// Useful if a local variable shadows the global [base32RfcHex] constant.
 Uint8List base32RfcHexDecode(String input) => base32RfcHex.decode(input);
 
+/// A [base32Crockford] encoder and decoder with Crockford alphabet.
+///
+/// It encodes and decodes using the Crockford alphabet.
+/// It does not allow invalid characters when decoding.
 const Base32CodecCrockford base32Crockford = Base32CodecCrockford();
 
+/// Encodes [input] using [base32Crockford] encoding with Crockford alphabet.
+///
+/// Shorthand for `base32Crockford.encode(input)`.
+/// Useful if a local variable shadows the global [base32Crockford] constant.
 String base32CrockfordEncode(Uint8List input) => base32Crockford.encode(input);
 
+/// Decodes [input] using [base32Crockford] decoding with Crockford alphabet.
+///
+/// Shorthand for `base32Crockford.decode(input)`.
+/// Useful if a local variable shadows the global [base32Crockford] constant.
 Uint8List base32CrockfordDecode(String input) => base32Crockford.decode(input);
 
+/// A [base32ZBase] encoder and decoder with Z-base alphabet.
+///
+/// It encodes and decodes using the Z-base alphabet.
+/// It does not allow invalid characters when decoding.
 const Base32CodecZBase base32ZBase = Base32CodecZBase();
 
+/// Encodes [input] using [base32ZBase] encoding with Z-base alphabet.
+///
+/// Shorthand for `base32ZBase.encode(input)`.
+/// Useful if a local variable shadows the global [base32ZBase] constant.
 String base32ZBaseEncode(Uint8List input) => base32ZBase.encode(input);
 
+/// Decodes [input] using [base32ZBase] decoding with Z-base alphabet.
+///
+/// Shorthand for `base32ZBase.decode(input)`.
+/// Useful if a local variable shadows the global [base32ZBase] constant.
 Uint8List base32ZBaseDecode(String input) => base32ZBase.decode(input);
 
+/// A [base32GeoHash] encoder and decoder with GeoHash alphabet.
+///
+/// It encodes and decodes using the GeoHash alphabet.
+/// It does not allow invalid characters when decoding.
 const Base32CodecGeoHash base32GeoHash = Base32CodecGeoHash();
 
+/// Encodes [input] using [base32GeoHash] encoding with GeoHash alphabet.
+///
+/// Shorthand for `base32GeoHash.encode(input)`.
+/// Useful if a local variable shadows the global [base32GeoHash] constant.
 String base32GeoHashEncode(Uint8List input) => base32GeoHash.encode(input);
 
+/// Decodes [input] using [base32GeoHash] decoding with GeoHash alphabet.
+///
+/// Shorthand for `base32GeoHash.decode(input)`.
+/// Useful if a local variable shadows the global [base32GeoHash] constant.
 Uint8List base32GeoHashDecode(String input) => base32GeoHash.decode(input);
 
+/// A [base32WordSafe] encoder and decoder with WordSafe alphabet.
+///
+/// It encodes and decodes using the WordSafe alphabet.
+/// It does not allow invalid characters when decoding.
 const Base32CodecWordSafe base32WordSafe = Base32CodecWordSafe();
 
+/// Encodes [input] using [base32WordSafe] encoding with WordSafe alphabet.
+///
+/// Shorthand for `base32WordSafe.encode(input)`.
+/// Useful if a local variable shadows the global [base32WordSafe] constant.
 String base32WordSafeEncode(Uint8List input) => base32WordSafe.encode(input);
 
+/// Decodes [input] using [base32WordSafe] decoding with WordSafe alphabet.
+///
+/// Shorthand for `base32WordSafe.decode(input)`.
+/// Useful if a local variable shadows the global [base32WordSafe] constant.
 Uint8List base32WordSafeDecode(String input) => base32WordSafe.decode(input);
 
+/// A [base32Rfc](https://tools.ietf.org/html/rfc4648) encoder and decoder.
+///
+/// It encodes and decodes using the base32 alphabet.
+/// It does not allow invalid characters when decoding.
 class Base32CodecRfc extends Codec<Uint8List, String> {
   static const String _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
   static const String _padding = "=";
@@ -51,6 +127,10 @@ class Base32CodecRfc extends Codec<Uint8List, String> {
       const Base32Decoder(_alphabet, _padding);
 }
 
+/// A [base32RfcHex](https://tools.ietf.org/html/rfc4648) encoder and decoder.
+///
+/// It encodes and decodes using the base32Hex alphabet.
+/// It does not allow invalid characters when decoding.
 class Base32CodecRfcHex extends Codec<Uint8List, String> {
   static const String _alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUV";
   static const String _padding = "=";
@@ -65,6 +145,10 @@ class Base32CodecRfcHex extends Codec<Uint8List, String> {
       const Base32Decoder(_alphabet, _padding);
 }
 
+/// A [base32Crockford] encoder and decoder with Crockford alphabet.
+///
+/// It encodes and decodes using the Crockford alphabet.
+/// It does not allow invalid characters when decoding.
 class Base32CodecCrockford extends Codec<Uint8List, String> {
   static const String _alphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
   static const String _padding = "";
@@ -79,6 +163,10 @@ class Base32CodecCrockford extends Codec<Uint8List, String> {
       const Base32DecoderCrockford(_alphabet, _padding);
 }
 
+/// A [base32ZBase] encoder and decoder with Z-base alphabet.
+///
+/// It encodes and decodes using the Z-base alphabet.
+/// It does not allow invalid characters when decoding.
 class Base32CodecZBase extends Codec<Uint8List, String> {
   static const String _alphabet = "YBNDRFG8EJKMCPQXOT1UWISZA345H769";
   static const String _padding = "";
@@ -93,6 +181,10 @@ class Base32CodecZBase extends Codec<Uint8List, String> {
       const Base32Decoder(_alphabet, _padding);
 }
 
+/// A [base32GeoHash] encoder and decoder with GeoHash alphabet.
+///
+/// It encodes and decodes using the GeoHash alphabet.
+/// It does not allow invalid characters when decoding.
 class Base32CodecGeoHash extends Codec<Uint8List, String> {
   static const String _alphabet = "0123456789bcdefghjkmnpqrstuvwxyz";
   static const String _padding = "";
@@ -107,6 +199,10 @@ class Base32CodecGeoHash extends Codec<Uint8List, String> {
       const Base32Decoder(_alphabet, _padding, caseInsensitive: false);
 }
 
+/// A [base32WordSafe] encoder and decoder with WordSafe alphabet.
+///
+/// It encodes and decodes using the WordSafe alphabet.
+/// It does not allow invalid characters when decoding.
 class Base32CodecWordSafe extends Codec<Uint8List, String> {
   static const String _alphabet = "23456789CFGHJMPQRVWXcfghjmpqrvwx";
   static const String _padding = "";
@@ -121,6 +217,10 @@ class Base32CodecWordSafe extends Codec<Uint8List, String> {
       const Base32Decoder(_alphabet, _padding, caseInsensitive: false);
 }
 
+/// A Base32 encoder and decoder with custom [alphabet] and [padding].
+///
+/// [padding] may be empty.
+/// It does not allow invalid characters when decoding.
 class Base32CodecCustom extends Codec<Uint8List, String> {
   final String alphabet;
   final String padding;
@@ -133,6 +233,14 @@ class Base32CodecCustom extends Codec<Uint8List, String> {
   Converter<String, Uint8List> get decoder => Base32Decoder(alphabet, padding);
 }
 
+/// Base32 encoding converter with given [_alphabet] and [_padding].
+///
+/// [_padding] may be empty.
+/// Encodes lists of bytes using Rfc [base32Rfc], RfcHex [base32RfcHex],
+/// Crockford [base32Crockford], Z-base [base32ZBase], GeoHash [base32GeoHash],
+/// WordSafe [base32WordSafe] alphabets and [Base32CodecCustom] alphabet.
+///
+/// The results are ASCII strings using a restricted alphabet.
 class Base32Encoder extends Converter<Uint8List, String> {
   final String _alphabet;
   final String _padding;
@@ -166,6 +274,7 @@ class Base32Encoder extends Converter<Uint8List, String> {
   }
 }
 
+/// Decoder for base32 encoded data based on given [_alphabet] and [_padding]
 class Base32Decoder extends Converter<String, Uint8List> {
   final String _alphabet;
   final String _padding;
@@ -203,6 +312,7 @@ class Base32Decoder extends Converter<String, Uint8List> {
   }
 }
 
+/// Decoder for [base32Crockford]
 class Base32DecoderCrockford extends Base32Decoder {
   const Base32DecoderCrockford(String alphabet, String padding)
       : super(alphabet, padding);

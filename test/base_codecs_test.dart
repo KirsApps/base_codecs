@@ -567,6 +567,8 @@ void main() {
       const encodedWithSymbols =
           "<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>  Cj@.4Gp\$d7F!,L7@<6@)/0JDEF<G%<+EV  :2F!,O<DJ+*.@<*K0@<6L(Df-\\0Ec5e"
           ";DffZ(EZee.Bl.9pF\"AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@F      D,*)+C] U=@3BN#EcYf 8ATD3s@q?d\$AftVqCh           [NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<?3r@:F%a+D58'ATD4\$Bl@l3De:,-DJs`8ARoFb/0JMK@qB4^F!,R<AKZ&-DfTqBG%G>uD.RTpAKYo'+CT/5+Cei#DII?(E,9)oF*2M7/c~>";
+      const zeroEncoded = '<~zz~>';
+      final zeroDecoded = Uint8List.fromList([0, 0, 0, 0, 0, 0, 0, 0]);
       test('encode', () {
         expect(
           base85AsciiEncode(Uint8List.fromList(utf8.encode(testString))),
@@ -575,8 +577,16 @@ void main() {
       });
       test('encode zero compression', () {
         expect(
-          base85AsciiEncode(Uint8List.fromList([0, 0, 0, 0, 0, 0, 0, 0])),
-          equals('<~zz~>'),
+          base85AsciiEncode(zeroDecoded),
+          equals(zeroEncoded),
+        );
+      });
+      test('decode zero compression', () {
+        expect(
+          base85AsciiDecode(zeroEncoded),
+          equals(
+            zeroDecoded,
+          ),
         );
       });
       test('decode', () {
@@ -622,6 +632,20 @@ void main() {
         expect(
           base85ZDecode(encodedWithSymbols),
           [...utf8.encode(testString), 0, 0, 0],
+        );
+      });
+      test('encode failed', () {
+        expect(
+          () => base85ZEncode(
+            Uint8List.fromList([0, 0]),
+          ),
+          throwsArgumentError,
+        );
+      });
+      test('decode failed', () {
+        expect(
+          () => base85ZDecode('000'),
+          throwsArgumentError,
         );
       });
     });

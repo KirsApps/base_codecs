@@ -98,7 +98,8 @@ void main() {
       });
       test('Crockford decode', () {
         expect(
-          const Base32DecoderCrockford("0123456789ABCDEFGHJKMNPQRSTVWXYZ", "")
+          //ignore: prefer_const_constructors
+          Base32DecoderCrockford("0123456789ABCDEFGHJKMNPQRSTVWXYZ", "")
               .convert(encoded),
           utf8.encode(testString),
         );
@@ -276,7 +277,8 @@ void main() {
       });
     });
     group('Custom', () {
-      const codec = Base58CodecCustom(
+      //ignore: prefer_const_constructors
+      final codec = Base58CodecCustom(
         alphabet: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ",
         decodeList: [
           -1,

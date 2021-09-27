@@ -80,7 +80,7 @@ class Base85DecoderAscii extends Converter<String, Uint8List> {
 
   @override
   Uint8List convert(String input) {
-    input = input.replaceAll(base85RegExp, '');
+    input = input.replaceAll(base85RegExp, '').replaceAll('z', '!!!!!');
     final length = input.length;
     final padding = length % 5 == 0 ? 0 : 5 - (length % 5);
     if (padding != 0) {

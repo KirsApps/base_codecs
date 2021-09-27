@@ -32,7 +32,6 @@ void main() {
   });
   group('base32', () {
     group('RFC', () {
-      const codec = Base32CodecRfc();
       const encoded =
           "JVQW4IDJOMQGI2LTORUW4Z3VNFZWQZLEFQQG433UEBXW43DZEBRHSIDINFZSA4TFMFZW63RMEBRHK5BAMJ4SA5DINFZSA43JNZTXK3DBOIQHAYLTONUW63RAMZZG63JAN52GQZLSEBQW42LNMFWHGLBAO5UGSY3IEBUXGIDBEBWHK43UEBXWMIDUNBSSA3LJNZSCYIDUNBQXIIDCPEQGCIDQMVZHGZLWMVZGC3TDMUQG6ZRAMRSWY2LHNB2CA2LOEB2GQZJAMNXW45DJNZ2WKZBAMFXGIIDJNZSGKZTBORUWOYLCNRSSAZ3FNZSXEYLUNFXW4IDPMYQGW3TPO5WGKZDHMUWCAZLYMNSWKZDTEB2GQZJAONUG64TUEB3GK2DFNVSW4Y3FEBXWMIDBNZ4SAY3BOJXGC3BAOBWGKYLTOVZGKLQ=";
       test('encode', () {
@@ -136,7 +135,6 @@ void main() {
   group('base58', () {
     const dataWithZero = [0, 0, 0, 0, 0xff, 0, 0, 0, 0, 0xff];
     group('Bitcoin', () {
-      const codec = Base58CodecBitcoin();
       const testData = [
         ["", ""],
         ["61", "2g"],
@@ -233,7 +231,6 @@ void main() {
       });
     });
     group('Ripple', () {
-      const codec = Base58CodecRipple();
       const encodedDataWithZero = "rrrrsByzJkR6g";
       const encoded =
           'pKGnob7HfDpGpqLPjujWXdUdrEKa6eTdCUjV8rMAPsu8ViAcoTzsQyxtBe3DFxCcnwC8CaVLpbhwe9RWHNJ9nfWJFTXTXKcSyEZbrfwLW7rBcB14vpU8cqmnqT2dzLciyeCtCjtEZCJrhNKKCf7Vdn6f7XESqFmBrhhApNyb9gAv6fmoCZFcfoSQvhZS1o9tDrn39NjLNRTebQoEtt351gK2iXhHGRW7FQURkwPWu54iYeVhXNmNhezhCpmW4rvgGPcX3mKmfRXjY8Qr2GEsoZvKiQQrySNqhbnCLvQxcGzUF9x1VdCgKsFXUrRQPC38y65k3JN8GdXV999Aj2jfggicNtmkZHhry8FvSYkDecL384MT';

@@ -96,7 +96,7 @@ class Base16Decoder extends Converter<String, Uint8List> {
     }
     String data = input.toUpperCase();
     if (data.length % 2 != 0) {
-      data = "0$data";
+      data = "${_alphabet[0]}$data";
     }
     final result = Uint8List(data.length ~/ 2);
     for (int i = 0; i < result.length; i++) {

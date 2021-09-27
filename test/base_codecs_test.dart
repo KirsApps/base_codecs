@@ -29,6 +29,9 @@ void main() {
     test('decode custom', () {
       expect(custom.decode('AAABACADAEAFA9A8A7A6A5A4A3A2A1A0'), customData);
     });
+    test('decode failed', () {
+      expect(() => base16Decode('0xPADBEEF'), throwsFormatException);
+    });
   });
   group('base32', () {
     group('RFC', () {
@@ -42,6 +45,9 @@ void main() {
       });
       test('decode', () {
         expect(base32RfcDecode(encoded), utf8.encode(testString));
+      });
+      test('decode failed', () {
+        expect(() => base32RfcDecode('=_sdfsdfdsf'), throwsFormatException);
       });
     });
     group('HEX', () {
@@ -205,6 +211,9 @@ void main() {
       });
       test('decode with zero', () {
         expect(base58BitcoinDecode(encodedDataWithZero), dataWithZero);
+      });
+      test('decode failed', () {
+        expect(() => base58BitcoinDecode('=_sdfsdfdsf'), throwsFormatException);
       });
     });
     group('Flickr', () {
@@ -551,11 +560,21 @@ void main() {
           equals(encoded),
         );
       });
+      test('encode zero compression', () {
+        expect(
+          base85AsciiEncode(Uint8List.fromList([0,0,0,0,0,0,0,0])),
+          equals('<~zz~>'),
+        );
+      });
       test('decode', () {
         expect(utf8.decode(base85AsciiDecode(encoded)), testString);
       });
       test('decode with spec symbols', () {
         expect(utf8.decode(base85AsciiDecode(encodedWithSymbols)), testString);
+      });
+      test('decode failed', () {
+        expect(
+            () => base85AsciiDecode('=_asdsdfsdfdsf'), throwsFormatException);
       });
     });
     group('Z85', () {
@@ -616,6 +635,12 @@ void main() {
       });
       test('decode', () {
         expect(base16.encode(base58CheckDecode(encoded)), decoded);
+      });
+      test('decode failed', () {
+        expect(
+            () => base58CheckDecode(
+                '5Kd3NBUAdUnhyzenEwVLy9pBKxSwXvE9FMPyR4UKZvpe6E3AgL'),
+            throwsArgumentError);
       });
     });
   });

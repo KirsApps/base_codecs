@@ -558,6 +558,9 @@ void main() {
       test('decode with zero', () {
         expect(codec.decode(encodedDataWithZero), dataWithZero);
       });
+      test('decode failed', () {
+        expect(() => codec.decode('=_sdfsdfdsf'), throwsFormatException);
+      });
     });
   });
   group('base85', () {

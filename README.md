@@ -10,7 +10,8 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
-
+[![pub](https://img.shields.io/pub/v/base_codecs.svg)](https://pub.dev/packages/lint)
+[![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)
 TODO: Put a short description of the package here that helps potential users
 know whether this package might be useful for them.
 

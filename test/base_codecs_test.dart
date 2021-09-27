@@ -562,7 +562,7 @@ void main() {
       });
       test('encode zero compression', () {
         expect(
-          base85AsciiEncode(Uint8List.fromList([0,0,0,0,0,0,0,0])),
+          base85AsciiEncode(Uint8List.fromList([0, 0, 0, 0, 0, 0, 0, 0])),
           equals('<~zz~>'),
         );
       });

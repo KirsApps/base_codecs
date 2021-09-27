@@ -17,9 +17,11 @@ void main() {
       expect(base16.decode('DEADBEEF'), data);
     });
     const custom = Base16CodecCustom('ABCDEF9876543210');
-    final customData = Uint8List.fromList([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
+    final customData = Uint8List.fromList(
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
     test('encode custom', () {
-      expect(custom.encode(customData), equals('0A0B0C0D0E0F09080706050403020100'));
+      expect(custom.encode(customData),
+          equals('0A0B0C0D0E0F09080706050403020100'));
     });
     test('decode custom', () {
       expect(custom.decode('AAABACADAEAFA9A8A7A6A5A4A3A2A1A0'), customData);
@@ -84,6 +86,20 @@ void main() {
         expect(
           codec.decode(encodedWithReplaceSymbols),
           utf8.encode(testString),
+        );
+      });
+      test('decode', () {
+        expect(codec.decode(encoded), utf8.encode(testString));
+      });
+    });
+    group('Custom', () {
+      const codec = Base32CodecCustom("0123456789ABCDEFGHJKMNPQRSTVWXYZ", '');
+      const encoded =
+          "9NGPW839ECG68TBKEHMPWSVND5SPGSB45GG6WVVM41QPWV3S41H7J838D5SJ0WK5C5SPYVHC41H7AX10C9WJ0X38D5SJ0WV9DSKQAV31E8G70RBKEDMPYVH0CSS6YV90DXT6GSBJ41GPWTBDC5P76B10EXM6JRV841MQ683141P7AWVM41QPC83MD1JJ0VB9DSJ2R83MD1GQ8832F4G6283GCNS76SBPCNS62VK3CMG6YSH0CHJPRTB7D1T20TBE41T6GS90CDQPWX39DSTPAS10C5Q68839DSJ6ASK1EHMPERB2DHJJ0SV5DSJQ4RBMD5QPW83FCRG6PVKFEXP6AS37CMP20SBRCDJPAS3K41T6GS90EDM6YWKM41V6AT35DNJPWRV541QPC831DSWJ0RV1E9Q62V10E1P6ARBKENS6ABG";
+      test('encode', () {
+        expect(
+          codec.encode(Uint8List.fromList(utf8.encode(testString))),
+          equals(encoded),
         );
       });
       test('decode', () {
@@ -169,6 +185,70 @@ void main() {
     });
     group('Flickr', () {
       const codec = Base58CodecFlickr();
+      const encodedDataWithZero = "11113bYZiKqGF";
+      const encoded =
+          '2jg5NAth7d2g2QkoJUJvwCcC1fj6GDsCEcJuM1mWo3UMuRWBNsZ3pYXTbD8dPXEB5aEME6uk2A4aD9qvhei957viPswswjBrYfyA17akvt1bBbSnV2cMBQL5QszCZkBRYDETEJTfyEi14ejjE7tuC5G7twfrQPLb144W2eYA9FWVG7LNEyPB7NrpV4yrSN9Td1589eJkeqsDApNfTT8HSFjzRw4hgqvtPpcqKaovUHnRxDu4weLe4DZ4E2Lvn1VFgoBw8LjL7qwJxMp1zgf3NyVjRpp1YreQ4A5EkVpXBgZcP9XSuCEFj3Pwc1qpoE8MYGHK8ieMgCwu999WJzJ7FFRBeTLKyh41YMPVrxKdDBk8Mnms';
+      test('encode', () {
+        expect(
+          codec.encode(Uint8List.fromList(utf8.encode(testString))),
+          equals(encoded),
+        );
+      });
+      test('decode', () {
+        expect(codec.decode(encoded), utf8.encode(testString));
+      });
+      test('encode with zero', () {
+        expect(
+          codec.encode(Uint8List.fromList(dataWithZero)),
+          equals(encodedDataWithZero),
+        );
+      });
+      test('decode with zero', () {
+        expect(codec.decode(encodedDataWithZero), dataWithZero);
+      });
+    });
+    group('Ripple', () {
+      const codec = Base58CodecRipple();
+      const encodedDataWithZero = "rrrrsByzJkR6g";
+      const encoded =
+          'pKGnob7HfDpGpqLPjujWXdUdrEKa6eTdCUjV8rMAPsu8ViAcoTzsQyxtBe3DFxCcnwC8CaVLpbhwe9RWHNJ9nfWJFTXTXKcSyEZbrfwLW7rBcB14vpU8cqmnqT2dzLciyeCtCjtEZCJrhNKKCf7Vdn6f7XESqFmBrhhApNyb9gAv6fmoCZFcfoSQvhZS1o9tDrn39NjLNRTebQoEtt351gK2iXhHGRW7FQURkwPWu54iYeVhXNmNhezhCpmW4rvgGPcX3mKmfRXjY8Qr2GEsoZvKiQQrySNqhbnCLvQxcGzUF9x1VdCgKsFXUrRQPC38y65k3JN8GdXV999Aj2jfggicNtmkZHhry8FvSYkDecL384MT';
+      test('encode', () {
+        expect(
+          codec.encode(Uint8List.fromList(utf8.encode(testString))),
+          equals(encoded),
+        );
+      });
+      test('decode', () {
+        expect(codec.decode(encoded), utf8.encode(testString));
+      });
+      test('encode with zero', () {
+        expect(
+          codec.encode(Uint8List.fromList(dataWithZero)),
+          equals(encodedDataWithZero),
+        );
+      });
+      test('decode with zero', () {
+        expect(codec.decode(encodedDataWithZero), dataWithZero);
+      });
+    });
+    group('Custom', () {
+      const codec = Base58CodecCustom(alphabet: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ",
+        decodeList: [
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0,1,2,3,4,5,6,7,
+        8,-1,-1,-1,-1,-1,-1,-1,34,35,36,37,38,39,40,41,-1,42,43,
+        44,45,46,-1,47,48,49,50,51,52,53,54,55,56,57,-1,-1,-1,-1,
+        -1,-1,9,10,11,12,13,14,15,16,17,18,19,-1,20,21,22,23,24,
+        25,26,27,28,29,30,31,32,33,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1
+      ],);
       const encodedDataWithZero = "11113bYZiKqGF";
       const encoded =
           '2jg5NAth7d2g2QkoJUJvwCcC1fj6GDsCEcJuM1mWo3UMuRWBNsZ3pYXTbD8dPXEB5aEME6uk2A4aD9qvhei957viPswswjBrYfyA17akvt1bBbSnV2cMBQL5QszCZkBRYDETEJTfyEi14ejjE7tuC5G7twfrQPLb144W2eYA9FWVG7LNEyPB7NrpV4yrSN9Td1589eJkeqsDApNfTT8HSFjzRw4hgqvtPpcqKaovUHnRxDu4weLe4DZ4E2Lvn1VFgoBw8LjL7qwJxMp1zgf3NyVjRpp1YreQ4A5EkVpXBgZcP9XSuCEFj3Pwc1qpoE8MYGHK8ieMgCwu999WJzJ7FFRBeTLKyh41YMPVrxKdDBk8Mnms';

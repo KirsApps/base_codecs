@@ -92,6 +92,34 @@ void main() {
         expect(codec.decode(encoded), utf8.encode(testString));
       });
     });
+    group('WordSafe', () {
+      const codec = Base32CodecWordSafe();
+      const encoded =
+          "FfRgrC5FPJR8CpHXPVcgrmqfM7mgRmH67RR8rqqc63hgrq5m63V9WC5CM7mW2rX7J7mgwqVJ63V9Gv32JFrW2v5CM7mW2rqFMmXhGq53PCR92jHXPMcgwqV2Jmm8wqF2Mvp8RmHW63RgrpHMJ7g98H32Pvc8WjqC63ch8C5363g9Grqc63hgJC5cM3WW2qHFMmW4jC5cM3RhCC54Q6R84C5RJfm98mHgJfm84qX5JcR8wmV2JVWgjpH9M3p42pHP63p8RmF2JMhgrv5FMmpgGm32J7h8CC5FMmW8GmX3PVcgPjH4MVWW2mq7MmWh6jHcM7hgrC5QJjR8gqXQPvg8Gm59Jcg42mHjJMWgGm5X63p8RmF2PMc8wrXc63q8Gp57MfWgrjq763hgJC53MmrW2jq3PFh84q32P3g8GjHXPfm8GHR";
+      test('encode', () {
+        expect(
+          codec.encode(Uint8List.fromList(utf8.encode(testString))),
+          equals(encoded),
+        );
+      });
+      test('decode', () {
+        expect(codec.decode(encoded), utf8.encode(testString));
+      });
+    });
+    group('GeoHash', () {
+      const codec = Base32CodecGeoHash();
+      const encoded =
+          "9phqw839fdh68ucmfjnqwtvpe5tqhtc45hh6wvvn41rqwv3t41j7k838e5tk0wm5d5tqyvjd41j7bx10d9wk0x38e5tk0wv9etmrbv31f8h70scmfenqyvj0dtt6yv90exu6htck41hqwuced5q76c10fxn6ksv841nr683141q7bwvn41rqd83ne1kk0vc9etk2s83ne1hr8832g4h6283hdpt76tcqdpt62vm3dnh6ytj0djkqsuc7e1u20ucf41u6ht90derqwx39etuqbt10d5r68839etk6btm1fjnqfsc2ejkk0tv5etkr4scne5rqw83gdsh6qvmgfxq6bt37dnq20tcsdekqbt3m41u6ht90fen6ywmn41v6bu35epkqwsv541rqd831etwk0sv1f9r62v10f1q6bscmfpt6bch";
+      test('encode', () {
+        expect(
+          codec.encode(Uint8List.fromList(utf8.encode(testString))),
+          equals(encoded),
+        );
+      });
+      test('decode', () {
+        expect(codec.decode(encoded), utf8.encode(testString));
+      });
+    });
     group('Custom', () {
       const codec = Base32CodecCustom("0123456789ABCDEFGHJKMNPQRSTVWXYZ", '');
       const encoded =

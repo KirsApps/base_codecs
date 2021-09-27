@@ -18,10 +18,10 @@ void main() {
     });
     const custom = Base16CodecCustom('ABCDEF9876543210');
     final customData = Uint8List.fromList(
-        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],);
     test('encode custom', () {
       expect(custom.encode(customData),
-          equals('0A0B0C0D0E0F09080706050403020100'));
+          equals('0A0B0C0D0E0F09080706050403020100'),);
     });
     test('decode custom', () {
       expect(custom.decode('AAABACADAEAFA9A8A7A6A5A4A3A2A1A0'), customData);

@@ -96,6 +96,13 @@ void main() {
       test('decode', () {
         expect(base32CrockfordDecode(encoded), utf8.encode(testString));
       });
+      test('Crockford decode', () {
+        expect(
+          const Base32DecoderCrockford("0123456789ABCDEFGHJKMNPQRSTVWXYZ", "")
+              .convert(encoded),
+          utf8.encode(testString),
+        );
+      });
     });
     group('WordSafe', () {
       const encoded =

@@ -574,7 +574,9 @@ void main() {
       });
       test('decode failed', () {
         expect(
-            () => base85AsciiDecode('=_asdsdfsdfdsf'), throwsFormatException);
+          () => base85AsciiDecode('=_asdsdfsdfdsf'),
+          throwsFormatException,
+        );
       });
     });
     group('Z85', () {
@@ -638,9 +640,11 @@ void main() {
       });
       test('decode failed', () {
         expect(
-            () => base58CheckDecode(
-                '5Kd3NBUAdUnhyzenEwVLy9pBKxSwXvE9FMPyR4UKZvpe6E3AgL'),
-            throwsArgumentError);
+          () => base58CheckDecode(
+            '5Kd3NBUAdUnhyzenEwVLy9pBKxSwXvE9FMPyR4UKZvpe6E3AgL',
+          ),
+          throwsArgumentError,
+        );
       });
     });
   });

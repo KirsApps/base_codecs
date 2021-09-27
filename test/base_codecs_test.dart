@@ -238,6 +238,9 @@ void main() {
       test('decode with zero', () {
         expect(base58FlickrDecode(encodedDataWithZero), dataWithZero);
       });
+      test('decode failed', () {
+        expect(() => base58FlickrDecode('=_sdfsdfdsf'), throwsFormatException);
+      });
     });
     group('Ripple', () {
       const encodedDataWithZero = "rrrrsByzJkR6g";
@@ -260,6 +263,9 @@ void main() {
       });
       test('decode with zero', () {
         expect(base58RippleDecode(encodedDataWithZero), dataWithZero);
+      });
+      test('decode failed', () {
+        expect(() => base58RippleDecode('=_sdfsdfdsf'), throwsFormatException);
       });
     });
     group('Custom', () {

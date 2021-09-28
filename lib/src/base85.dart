@@ -80,7 +80,7 @@ class Base85DecoderAscii extends Converter<String, Uint8List> {
 
   @override
   Uint8List convert(String input) {
-    input = input.replaceAll(base85RegExp, '').replaceAll('z', '!!!!!');
+    input = input.replaceAll(base85RegExp, '');
     final length = input.length;
     final padding = length % 5 == 0 ? 0 : 5 - (length % 5);
     if (padding != 0) {
@@ -251,13 +251,12 @@ Uint8List _processDecodeInput({
   required bool zeroCompressionEnabled,
 }) {
   final length = input.length;
-  final output = Uint8List(length ~/ 5 * 4);
+  final output = <int>[];
   final codeUnits = Uint8List.fromList(input.codeUnits);
   int unitCounter = 0;
-  int offset = 0;
   for (int i = 0; i < length; i++,) {
     if (zeroCompressionEnabled && input[i] == 'z' && unitCounter == 0) {
-      offset += 4;
+      output.addAll([0, 0, 0, 0]);
       continue;
     }
     unitCounter++;
@@ -272,13 +271,14 @@ Uint8List _processDecodeInput({
           'Value result $value larger than max Uint 32 or negative, invalid data provided',
         );
       }
-      output[offset] = value >> 24;
-      output[offset + 1] = value >> 16;
-      output[offset + 2] = value >> 8;
-      output[offset + 3] = value & 0xFF;
-      offset += 4;
+      output.addAll([
+        value >> 24 & 0xFF,
+        value >> 16 & 0xFF,
+        value >> 8 & 0xFF,
+        value & 0xFF
+      ]);
       unitCounter = 0;
     }
   }
-  return output;
+  return Uint8List.fromList(output);
 }

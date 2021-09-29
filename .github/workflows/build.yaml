@@ -1,4 +1,4 @@
-name: codecs_ci
+name: build
 
 on:
   push:

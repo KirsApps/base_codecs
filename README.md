@@ -10,32 +10,44 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
+[![codecov](https://codecov.io/gh/KirsApps/base_codecs/branch/master/graph/badge.svg)](https://codecov.io/gh/KirsApps/base_codecs)
 [![Build Status](https://github.com/KirsApps/base_codecs/workflows/build/badge.svg)](https://github.com/KirsApps/base_codecs/actions?query=workflow%3A"build"+branch%3Amaster)
 [![pub](https://img.shields.io/pub/v/base_codecs.svg)](https://pub.dev/packages/lint)
 [![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+
+A set of codecs for encode and decode data.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* [base16 (hex)](#Base16)
+* [base32](#Base32)
+* [base58](#Base58)
+* [base85](#Base85)
 
-## Getting started
+## Base16
+Supported hex alphabet and custom alphabets.
+### Hex
+### Custom
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+## Base32
+Supported Rfc, RfcHex, Crockford, ZBase, GeoHash, WordSafe, Custom alphabets
+### Rfc
+### RfcHex
+### Crockford
+### ZBase
+### GeoHash
+### WordSafe
+### Custom
+## Base58
+Supported Bitcoin, Flickr, Ripple, Custom alphabets
+## Base85
 
-## Usage
+Supported encoding specifications
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+* [Ascii85](http://en.wikipedia.org/wiki/Ascii85)
+* [ZeroMQ](http://rfc.zeromq.org/spec:32)
+* [IPv6](https://tools.ietf.org/html/rfc1924)
 
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+### Ascii85
+###ZeroMq
+### IPv6

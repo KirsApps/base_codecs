@@ -3,17 +3,7 @@ import 'dart:typed_data';
 
 import 'constants.dart';
 
-/// 85 pow 4
-const pow4 = 52200625;
-
-/// 85 pow 3
-const pow3 = 614125;
-
-/// 85 pow 2
-const pow2 = 7225;
-
-/// 85 pow 1
-const pow1 = 85;
+const powList = [52200625, 614125, 7225, 85, 1];
 
 /// Uint 32 max value
 const maxUint32 = 4294967295;
@@ -81,17 +71,11 @@ class Base85DecoderAscii extends Converter<String, Uint8List> {
   @override
   Uint8List convert(String input) {
     input = input.replaceAll(base85RegExp, '');
-    final length = input.length;
-    final padding = length % 5 == 0 ? 0 : 5 - (length % 5);
-    if (padding != 0) {
-      input = '$input${'u' * padding}';
-    }
-    final output = _processDecodeInput(
+    return _processDecodeInput(
       decodeList: _decodeList,
       input: input,
       zeroCompressionEnabled: true,
     );
-    return output.sublist(0, output.length - padding);
   }
 }
 
@@ -254,18 +238,20 @@ Uint8List _processDecodeInput({
   final output = <int>[];
   final codeUnits = Uint8List.fromList(input.codeUnits);
   int unitCounter = 0;
+  int value = 0;
   for (int i = 0; i < length; i++,) {
-    if (zeroCompressionEnabled && input[i] == 'z' && unitCounter == 0) {
-      output.addAll([0, 0, 0, 0]);
-      continue;
+    if (zeroCompressionEnabled && input[i] == 'z') {
+      if (unitCounter == 0) {
+        output.addAll([0, 0, 0, 0]);
+        continue;
+      } else {
+        throw const FormatException(
+          'Misaligned z in input',
+        );
+      }
     }
-    unitCounter++;
-    if (unitCounter == 5) {
-      final value = (decodeList[codeUnits[i - 4]] * pow4) +
-          (decodeList[codeUnits[i - 3]] * pow3) +
-          (decodeList[codeUnits[i - 2]] * pow2) +
-          (decodeList[codeUnits[i - 1]] * pow1) +
-          decodeList[codeUnits[i]];
+    value += decodeList[codeUnits[i]] * powList[unitCounter];
+    if (unitCounter == 4) {
       if (value > maxUint32 || value.isNegative) {
         throw FormatException(
           'Value result $value larger than max Uint 32 or negative, invalid data provided',
@@ -277,8 +263,26 @@ Uint8List _processDecodeInput({
         value >> 8 & 0xFF,
         value & 0xFF
       ]);
+      value = 0;
       unitCounter = 0;
+    } else {
+      unitCounter++;
     }
   }
-  return Uint8List.fromList(output);
+  int padding = 0;
+  if (unitCounter > 0) {
+    while (unitCounter < 5) {
+      /// 117 - u char
+      value += decodeList[117] * powList[unitCounter];
+      unitCounter++;
+      padding++;
+    }
+    output.addAll([
+      value >> 24 & 0xFF,
+      value >> 16 & 0xFF,
+      value >> 8 & 0xFF,
+      value & 0xFF
+    ]);
+  }
+  return Uint8List.fromList(output.sublist(0, output.length - padding));
 }

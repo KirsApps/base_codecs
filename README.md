@@ -10,7 +10,7 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
-[![Build Status](https://github.com/KirsApps/base_codecs/workflows/codecs_ci/badge.svg)](https://github.com/KirsApps/base_codecs/actions?query=workflow%3A"codecs_ci"+branch%3Amaster)
+[![Build Status](https://github.com/KirsApps/base_codecs/workflows/build/badge.svg)](https://github.com/KirsApps/base_codecs/actions?query=workflow%3A"build"+branch%3Amaster)
 [![pub](https://img.shields.io/pub/v/base_codecs.svg)](https://pub.dev/packages/lint)
 [![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)
 TODO: Put a short description of the package here that helps potential users

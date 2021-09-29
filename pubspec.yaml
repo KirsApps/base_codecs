@@ -1,7 +1,7 @@
 name: base_codecs
-description: A starting point for Dart libraries or applications.
+description: A set of base16 (hex), base32 (Rfc, RfcHex, Crockford, ZBase, GeoHash, WordSafe), Base58 (Bitcoin, Flickr, Ripple) with Base85Check, base85 (Ascii85, Z85, IPv6) codecs
 version: 1.0.0
-# homepage: https://www.example.com
+homepage: https://github.com/KirsApps/base_codecs
 
 environment:
   sdk: '>=2.12.0 <3.0.0'

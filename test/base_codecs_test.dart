@@ -572,8 +572,10 @@ void main() {
       const encodedWithSymbols =
           "<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>  Cj@.4Gp\$d7F!,L7@<6@)/0JDEF<G%<+EV  :2F!,O<DJ+*.@<*K0@<6L(Df-\\0Ec5e"
           ";DffZ(EZee.Bl.9pF\"AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@F      D,*)+C] U=@3BN#EcYf 8ATD3s@q?d\$AftVqCh           [NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<?3r@:F%a+D58'ATD4\$Bl@l3De:,-DJs`8ARoFb/0JMK@qB4^F!,R<AKZ&-DfTqBG%G>uD.RTpAKYo'+CT/5+Cei#DII?(E,9)oF*2M7/c~>";
-      const zeroEncoded = '<~zz~>';
-      final zeroDecoded = Uint8List.fromList([0, 0, 0, 0, 0, 0, 0, 0]);
+      const zeroEncoded = '<~zzfghgfz~>';
+      final zeroDecoded = Uint8List.fromList(
+        [0, 0, 0, 0, 0, 0, 0, 0, 0xd9, 0x47, 0xa3, 0xd5, 0, 0, 0, 0],
+      );
       test('encode', () {
         expect(
           base85AsciiEncode(Uint8List.fromList(utf8.encode(testString))),
@@ -593,6 +595,14 @@ void main() {
             zeroDecoded,
           ),
         );
+        expect(
+          base85AsciiDecode('<~zfghgf~>'),
+          equals(
+            Uint8List.fromList(
+              [0, 0, 0, 0, 0xd9, 0x47, 0xa3, 0xd5],
+            ),
+          ),
+        );
       });
       test('decode', () {
         expect(utf8.decode(base85AsciiDecode(encoded)), testString);
@@ -603,6 +613,10 @@ void main() {
       test('decode failed', () {
         expect(
           () => base85AsciiDecode('=_asdsdfsdfdsf'),
+          throwsFormatException,
+        );
+        expect(
+          () => base85AsciiDecode('<~zzfgzhgfz~>'),
           throwsFormatException,
         );
       });

@@ -72,7 +72,8 @@ Supported Bitcoin, Flickr, Ripple, Custom alphabets
 ### Custom
 - **Codec** - Base58CodecCustom
 - **Description** - You can pass custom alphabet and decodeList to Codec for encode and decode data by this alphabet.
-
+### Base58Check
+- **Functions** - base58CheckEncode, base58CheckDecode
 ## Base85
 
 Supported Ascii85, ZeroMq, IPv6

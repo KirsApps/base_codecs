@@ -23,7 +23,7 @@ void main() {
     test('encode custom', () {
       expect(
         custom.encode(customData),
-        equals('0A0B0C0D0E0F09080706050403020100'),
+        equals('AAABACADAEAFA9A8A7A6A5A4A3A2A1A0'),
       );
     });
     test('decode custom', () {

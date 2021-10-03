@@ -71,9 +71,10 @@ class Base16Encoder extends Converter<Uint8List, String> {
   @override
   String convert(Uint8List input) {
     final buffer = StringBuffer();
+    final zero = _alphabet[0];
     for (final byte in input) {
       buffer.write(
-        "${byte < 16 ? '0' : _alphabet[byte >> 4]}${_alphabet[byte & 0xF]}",
+        "${byte < 16 ? zero : _alphabet[byte >> 4]}${_alphabet[byte & 0xF]}",
       );
     }
 

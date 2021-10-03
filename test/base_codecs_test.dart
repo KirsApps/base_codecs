@@ -12,9 +12,11 @@ void main() {
     const data = [0xDE, 0xAD, 0xBE, 0xEF];
     test('encode', () {
       expect(hexEncode(Uint8List.fromList(data)), equals('DEADBEEF'));
+      expect(hexEncode(Uint8List.fromList([])), equals(''));
     });
     test('decode', () {
       expect(hexDecode('DEADBEEF'), data);
+      expect(hexDecode(''), []);
     });
     const custom = Base16CodecCustom('ABCDEF9876543210');
     final customData = Uint8List.fromList(
@@ -42,9 +44,14 @@ void main() {
           base32RfcEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base32RfcEncode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(base32RfcDecode(encoded), utf8.encode(testString));
+        expect(base32RfcDecode(''), []);
       });
       test('decode failed', () {
         expect(() => base32RfcDecode('=_sdfsdfdsf'), throwsFormatException);
@@ -58,9 +65,14 @@ void main() {
           base32RfcHexEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base32RfcHexEncode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(base32RfcHexDecode(encoded), utf8.encode(testString));
+        expect(base32RfcHexDecode(''), []);
       });
     });
     group('ZBase', () {
@@ -71,9 +83,14 @@ void main() {
           base32ZBaseEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base32ZBaseEncode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(base32ZBaseDecode(encoded), utf8.encode(testString));
+        expect(base32ZBaseDecode(''), []);
       });
     });
     group('Crockford', () {
@@ -86,6 +103,10 @@ void main() {
           base32CrockfordEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base32CrockfordEncode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode with i I l L  o O symbols', () {
         expect(
@@ -95,6 +116,7 @@ void main() {
       });
       test('decode', () {
         expect(base32CrockfordDecode(encoded), utf8.encode(testString));
+        expect(base32CrockfordDecode(''), []);
       });
       test('Crockford decode', () {
         expect(
@@ -113,9 +135,14 @@ void main() {
           base32WordSafeEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base32WordSafeEncode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(base32WordSafeDecode(encoded), utf8.encode(testString));
+        expect(base32WordSafeDecode(''), []);
       });
     });
     group('GeoHash', () {
@@ -126,9 +153,14 @@ void main() {
           base32GeoHashEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base32GeoHashEncode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(base32GeoHashDecode(encoded), utf8.encode(testString));
+        expect(base32GeoHashDecode(''), []);
       });
     });
     group('Custom', () {
@@ -140,9 +172,14 @@ void main() {
           codec.encode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          codec.encode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(codec.decode(encoded), utf8.encode(testString));
+        expect(codec.decode(''), []);
       });
     });
   });
@@ -207,9 +244,14 @@ void main() {
           base58BitcoinEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base58BitcoinEncode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(base58BitcoinDecode(encoded), utf8.encode(testString));
+        expect(base58BitcoinDecode(''), []);
       });
       test('encode with zero', () {
         expect(
@@ -233,9 +275,14 @@ void main() {
           base58FlickrEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base58FlickrEncode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(base58FlickrDecode(encoded), utf8.encode(testString));
+        expect(base58FlickrDecode(''), []);
       });
       test('encode with zero', () {
         expect(
@@ -259,9 +306,14 @@ void main() {
           base58RippleEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base58RippleEncode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(base58RippleDecode(encoded), utf8.encode(testString));
+        expect(base58RippleDecode(''), []);
       });
       test('encode with zero', () {
         expect(
@@ -547,9 +599,14 @@ void main() {
           codec.encode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          codec.encode(Uint8List.fromList([])),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(codec.decode(encoded), utf8.encode(testString));
+        expect(codec.decode(''), []);
       });
       test('encode with zero', () {
         expect(
@@ -581,6 +638,10 @@ void main() {
           base85AsciiEncode(Uint8List.fromList(utf8.encode(testString))),
           equals(encoded),
         );
+        expect(
+          base85AsciiEncode(Uint8List.fromList([])),
+          equals('<~~>'),
+        );
       });
       test('encode zero compression', () {
         expect(
@@ -606,6 +667,7 @@ void main() {
       });
       test('decode', () {
         expect(utf8.decode(base85AsciiDecode(encoded)), testString);
+        expect(base85AsciiDecode(''), []);
       });
       test('decode with spec symbols', () {
         expect(utf8.decode(base85AsciiDecode(encodedWithSymbols)), testString);
@@ -642,10 +704,17 @@ void main() {
           ),
           equals(rfcTestDataEncoded),
         );
+        expect(
+          base85ZEncode(
+            Uint8List.fromList([]),
+          ),
+          equals(''),
+        );
       });
       test('decode', () {
         expect(base85ZDecode(encoded), [...utf8.encode(testString), 0, 0, 0]);
         expect(base85ZDecode(rfcTestDataEncoded), rfcTestData);
+        expect(base85ZDecode(''), []);
       });
       test('decode with spec symbols', () {
         expect(

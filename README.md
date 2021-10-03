@@ -1,4 +1,3 @@
-
 [![codecov](https://codecov.io/gh/KirsApps/base_codecs/branch/master/graph/badge.svg)](https://codecov.io/gh/KirsApps/base_codecs)
 [![Build Status](https://github.com/KirsApps/base_codecs/workflows/build/badge.svg)](https://github.com/KirsApps/base_codecs/actions?query=workflow%3A"build"+branch%3Amaster)
 [![pub](https://img.shields.io/pub/v/base_codecs.svg)](https://pub.dev/packages/lint)

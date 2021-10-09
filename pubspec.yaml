@@ -1,6 +1,6 @@
 name: base_codecs
-description: A set of base16 (hex), base32 (Rfc, RfcHex, Crockford, ZBase, GeoHash, WordSafe), Base58 (Bitcoin, Flickr, Ripple) with Base85Check, base85 (Ascii85, Z85, IPv6) codecs
-version: 1.0.0
+description: A set of base16 (hex), base32 (Rfc, RfcHex, Crockford, ZBase, GeoHash, WordSafe), Base58 (Bitcoin, Flickr, Ripple) with Base58Check, base85 (Ascii85, Z85, IPv6) codecs
+version: 1.0.1
 homepage: https://github.com/KirsApps/base_codecs
 
 environment:
